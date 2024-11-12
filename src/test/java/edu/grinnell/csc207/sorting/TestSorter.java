@@ -120,11 +120,11 @@ public class TestSorter {
     if (null == intSorter) {
       return;
     } // if
-    for (int i = 0; i < 100; i++) {
+    for (int i = 1; i < 100; i++) {
       Integer[] unsorted = new Integer[i];
       Integer[] expected = new Integer[i];
       for (int n = 0; n < i; n++) {
-        unsorted[i - n] = n;
+        unsorted[i - n - 1] = n;
         expected[n] = n;
       } // for
       assertSorts(expected, unsorted, intSorter);

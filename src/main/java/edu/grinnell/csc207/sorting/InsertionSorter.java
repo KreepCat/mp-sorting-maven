@@ -5,10 +5,10 @@ import java.util.Comparator;
 /**
  * Something that sorts using insertion sort.
  *
- * @param <T>
- *   The types of values that are sorted.
+ * @param <T> The types of values that are sorted.
  *
  * @author Samuel A. Rebelsky
+ * @author Alexander Pollock
  */
 
 public class InsertionSorter<T> implements Sorter<T> {
@@ -28,9 +28,7 @@ public class InsertionSorter<T> implements Sorter<T> {
   /**
    * Create a sorter using a particular comparator.
    *
-   * @param comparator
-   *   The order in which elements in the array should be ordered
-   *   after sorting.
+   * @param comparator The order in which elements in the array should be ordered after sorting.
    */
   public InsertionSorter(Comparator<? super T> comparator) {
     this.order = comparator;
@@ -43,18 +41,26 @@ public class InsertionSorter<T> implements Sorter<T> {
   /**
    * Sort an array in place using insertion sort.
    *
-   * @param values
-   *   an array to sort.
+   * @param values an array to sort.
    *
-   * @post
-   *   The array has been sorted according to some order (often
-   *   one given to the constructor).
-   * @post
-   *   For all i, 0 &lt; i &lt; values.length,
-   *     order.compare(values[i-1], values[i]) &lt;= 0
+   * @post The array has been sorted according to some order (often one given to the constructor).
+   * @post For all i, 0 &lt; i &lt; values.length, order.compare(values[i-1], values[i]) &lt;= 0
    */
   @Override
   public void sort(T[] values) {
-    // STUB
+    if (values.length == 1) {
+      return;
+    } // if
+    for (int i = 1; i < values.length; i++) {
+      for (int n = i; n > 0; n--) {
+        if (order.compare(values[n - 1], values[n]) > 0) {
+          T storage = values[n - 1];
+          values[n - 1] = values[n];
+          values[n] = storage;
+        } else {
+          break;
+        } // if/else
+      } // for
+    } // for
   } // sort(T[])
 } // class InsertionSorter
