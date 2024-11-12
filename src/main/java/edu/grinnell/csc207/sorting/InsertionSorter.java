@@ -52,15 +52,27 @@ public class InsertionSorter<T> implements Sorter<T> {
       return;
     } // if
     for (int i = 1; i < values.length; i++) {
-      for (int n = i; n > 0; n--) {
-        if (order.compare(values[n - 1], values[n]) > 0) {
-          T storage = values[n - 1];
-          values[n - 1] = values[n];
-          values[n] = storage;
-        } else {
-          break;
-        } // if/else
-      } // for
+      insert(values, i);
     } // for
   } // sort(T[])
+
+  /**
+   * Insert an element into the first i values.
+   *
+   * @param values an array to sort
+   * @param i the index to possibly put into an earlier part of values
+   *
+   * @post The value at i is inserted properly and the array has been adjusted.
+   */
+  public void insert(T[] values, int i) {
+    for (int n = i; n > 0; n--) {
+      if (order.compare(values[n - 1], values[n]) > 0) {
+        T storage = values[n - 1];
+        values[n - 1] = values[n];
+        values[n] = storage;
+      } else {
+        break;
+      } // if/else
+    } // for
+  } // insert(T[])
 } // class InsertionSorter
