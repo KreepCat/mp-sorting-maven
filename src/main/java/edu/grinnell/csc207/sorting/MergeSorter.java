@@ -1,6 +1,8 @@
 package edu.grinnell.csc207.sorting;
 
 import java.util.Comparator;
+import static java.lang.reflect.Array.newInstance;
+
 
 /**
  * Something that sorts using merge sort.
@@ -45,8 +47,20 @@ public class MergeSorter<T> implements Sorter<T> {
    * @post The array has been sorted according to some order (often one given to the constructor).
    * @post For all i, 0 &lt; i &lt; values.length, order.compare(values[i-1], values[i]) &lt;= 0
    */
+  @SuppressWarnings({"unchecked"})
   @Override
   public void sort(T[] values) {
-    // STUB
+    int ub = values.length;
+    int m = ub/2;
+
+    T[] lowerSection = (T[]) newInstance(values[1].getClass(), m); 
+    T[] upperSection = (T[]) newInstance(values[1].getClass(), m-ub);
+    
   } // sort(T[])
+
+  @SuppressWarnings({"unchecked"})
+  public T[] merge(T[] values1, T[] values2) {
+    T[] toReturn = (T[]) newInstance(values1[1].getClass(), values1.length + values2.length); 
+    return toReturn;
+  } // merge
 } // class MergeSorter
