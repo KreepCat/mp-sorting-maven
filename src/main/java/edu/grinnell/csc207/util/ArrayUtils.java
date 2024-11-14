@@ -52,13 +52,19 @@ public class ArrayUtils {
   } // permute(T[])
 
   /**
-   * Convert a subset of an array to a string. Intended mostly for debug printing in which we need
-   * to keep track of parts of an array.
+   * Convert a subset of an array to a string. Intended mostly for debug
+   * printing in which we need to keep track of parts of an array.
    *
-   * @param <T> The type of elements in the array.
-   * @param values The array.
-   * @param lb The lower bound of the section of interest.
-   * @param ub The upper bound of the section of interest.
+   * @param <T>
+   *   The type of elements in the array.
+   * @param values
+   *   The array.
+   * @param lb
+   *   The lower bound of the section of interest.
+   * @param ub
+   *   The upper bound of the section of interest.
+   *
+   * @return the subarray as a string.
    */
   public static <T> String toString(T[] values, int lb, int ub) {
     if (lb >= ub) {
