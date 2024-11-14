@@ -47,20 +47,64 @@ public class MergeSorter<T> implements Sorter<T> {
    * @post The array has been sorted according to some order (often one given to the constructor).
    * @post For all i, 0 &lt; i &lt; values.length, order.compare(values[i-1], values[i]) &lt;= 0
    */
-  @SuppressWarnings({"unchecked"})
   @Override
   public void sort(T[] values) {
-    int ub = values.length;
-    int m = ub/2;
-
-    T[] lowerSection = (T[]) newInstance(values[1].getClass(), m); 
-    T[] upperSection = (T[]) newInstance(values[1].getClass(), m-ub);
-    
+    sort(values, 0, values.length - 1);
   } // sort(T[])
 
+  /**
+   * Sort the value between two indecies.
+   *
+   * @param values the values to sort.
+   * @param lb the lower bound to sort.
+   * @param ub the upper bound to sort.
+   */
+  public void sort(T[] values, int lb, int ub) {
+    if (lb >= ub) {
+      return;
+    } // if
+    int midpoint = lb / 2 + ub / 2;
+    sort(values, lb, midpoint);
+    sort(values, midpoint + 1, ub);
+    merge(values, lb, ub, midpoint);
+  } // sort(T[])
+
+  /**
+   * Merge the values between two points.
+   *
+   * @param values the array to merge values from
+   * @param lb the lower bound of the values to merge
+   * @param ub the upper bound of the values to merge (inclusive)
+   * @param midpoint the midpoint of the values to merge
+   *
+   * @post the values between lb and ub are merged.
+   */
   @SuppressWarnings({"unchecked"})
-  public T[] merge(T[] values1, T[] values2) {
-    T[] toReturn = (T[]) newInstance(values1[1].getClass(), values1.length + values2.length); 
-    return toReturn;
+  public void merge(T[] values, int lb, int ub, int midpoint) {
+    T[] helper = (T[]) newInstance((values[0]).getClass(), (ub - lb + 1));
+    int indexLow = lb;
+    int indexHigh = midpoint + 1;
+
+    for (int i = 0; i < helper.length; i++) {
+      if (indexLow > midpoint) {
+        helper[i] = values[indexHigh];
+        indexHigh++;
+      } else if (indexHigh > ub) {
+        helper[i] = values[indexLow];
+        indexLow++;
+      } else {
+        int comparator = order.compare(values[indexLow], values[indexHigh]);
+        if (comparator <= 0) {
+          helper[i] = values[indexLow];
+          indexLow++;
+        } else {
+          helper[i] = values[indexHigh];
+          indexHigh++;
+        } // if/else
+      } // if/else
+    } // for
+    for (int i = 0; i < helper.length; i++) {
+      values[lb + i] = helper[i];
+    } // for
   } // merge
 } // class MergeSorter

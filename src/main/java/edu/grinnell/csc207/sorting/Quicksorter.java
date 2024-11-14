@@ -47,19 +47,41 @@ public class Quicksorter<T> implements Sorter<T> {
    */
   @Override
   public void sort(T[] values) {
-    sort(values, 0, values.length-1);
+    sort(values, 0, values.length - 1);
   } // sort(T[])
 
+  /**
+   * Sort an array in place using Quicksort.
+   *
+   * @param values an array to sort.
+   * @param lb the lower bound of things to partition.
+   * @param ub the upper bound of things to partition.
+   *
+   * @post The array has been sorted according to some order (often one given to the constructor).
+   * @post For all i, 0 &lt; i &lt; values.length, order.compare(values[i-1], values[i]) &lt;= 0
+   */
+
   public void sort(T[] values, int lb, int ub) {
-    if (lb>=ub) {
+    if (lb >= ub) {
       return;
-    }
-    int pivotPos = (int) (Math.random() * (ub - lb)+1) + lb;
+    } // if
+    int pivotPos = (int) (Math.random() * (ub - lb) + 1) + lb;
     int[] bounds = partition(values, pivotPos, lb, ub);
-    sort(values, lb, bounds[0]-1);
+    sort(values, lb, bounds[0] - 1);
     sort(values, bounds[1], ub);
   } // sort(T[])
 
+  /**
+   * Partitions the array between values. A solution to the DNF problem.
+   *
+   * @param values an array to partition.
+   * @param pivotPos the pivot location.
+   * @param lb the lower bound of things to partition.
+   * @param ub the upper bound of things to partition.
+   *
+   * @return two bounds, where the less than and equal to bounds are.
+   * @post the array has been partitioned
+   */
   public int[] partition(T[] values, int pivotPos, int lb, int ub) {
     T pivot = values[pivotPos];
     int l = lb;
@@ -78,39 +100,22 @@ public class Quicksorter<T> implements Sorter<T> {
         e++;
       } // if/else
     } // for
-    int[] toReturn = {l, e-1};
+    int[] toReturn = {l, e - 1};
     return toReturn;
   } // partition(T[],int)
 
   /**
-   * Swap two values in an array.
+   * Swap two values in an array (copied from the tools).
+   *
+   * @param arr the array with the values to swap.
+   * @param i one of the locations to swap.
+   * @param j the other location to swap.
+   *
+   * @post the values have been swapped.
    */
   static void swap(Object[] arr, int i, int j) {
     Object tmp = arr[i];
     arr[i] = arr[j];
     arr[j] = tmp;
   } // swap(Object[], int, int)
-
-
-  public static void main(String[] args) {
-    Integer[] toSort = {1, 2, 3, 6, 4, 6, 9, 1, 4};
-    int tb = toSort.length-1;
-    int lb = 0;
-    for (int n = 0; n < 6; n++) {
-
-      int rand = ((int) (Math.random() * (tb - lb+1))) + lb;
-      System.err.println("randpos: " + rand + " Random Number " + toSort[rand] + " lb: " + lb + " tb: " + tb);
-      int[] bounds =
-          new Quicksorter<Integer>((x, y) -> x.compareTo(y)).partition(toSort, rand, lb, tb);
-
-      System.err.println("bounds[0]: " + bounds[0] + " bounds[1]: " + bounds[1]);
-      for (Integer toPrint : toSort) {
-        System.err.println(toPrint);
-      }
-      tb = bounds[0]-1;
-
-
-    }
-
-  }
 } // class Quicksorter

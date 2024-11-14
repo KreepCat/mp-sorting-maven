@@ -5,7 +5,6 @@ import edu.grinnell.csc207.sorting.Sorter;
 
 import java.io.PrintWriter;
 
-import java.util.Arrays;
 import java.util.Comparator;
 
 /**
