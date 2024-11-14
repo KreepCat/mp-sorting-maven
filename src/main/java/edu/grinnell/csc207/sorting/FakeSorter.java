@@ -11,6 +11,7 @@ import java.util.Comparator;
  * @param <T>
  *   Some type. Ignored.
  *
+ * @author Alexander Pollock
  * @author Samuel A. Rebelsky
  */
 

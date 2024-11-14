@@ -9,6 +9,7 @@ import static java.lang.reflect.Array.newInstance;
  *
  * @param <T> The types of values that are sorted.
  *
+ * @author Alexander Pollock
  * @author Samuel A. Rebelsky
  */
 

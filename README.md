@@ -15,6 +15,7 @@ This code may be found at <https://github.com/KreepCat/mp-sorting-maven>. The or
 
 Description of custom sorting algorithm
 ---------------------------------------
+The custom algorithm uses merge sort but attempts to ignore parts that are already sorted. By my understanding this is similar to Timsort.
 
 Notes on using Copilot (or other AI)
 ------------------------------------
