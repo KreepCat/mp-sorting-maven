@@ -48,9 +48,6 @@ public class InsertionSorter<T> implements Sorter<T> {
    */
   @Override
   public void sort(T[] values) {
-    if (values.length == 1) {
-      return;
-    } // if
     for (int i = 1; i < values.length; i++) {
       insert(values, i);
     } // for
@@ -74,5 +71,5 @@ public class InsertionSorter<T> implements Sorter<T> {
         break;
       } // if/else
     } // for
-  } // insert(T[])
+  } // insert(T[],int)
 } // class InsertionSorter

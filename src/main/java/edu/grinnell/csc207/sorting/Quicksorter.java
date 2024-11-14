@@ -69,7 +69,7 @@ public class Quicksorter<T> implements Sorter<T> {
     int[] bounds = partition(values, pivotPos, lb, ub);
     sort(values, lb, bounds[0] - 1);
     sort(values, bounds[1], ub);
-  } // sort(T[])
+  } // sort(T[],int,int)
 
   /**
    * Partitions the array between values. A solution to the DNF problem.
@@ -89,20 +89,20 @@ public class Quicksorter<T> implements Sorter<T> {
     int g = ub;
     while (g >= e) {
       int pivotComp = order.compare(values[e], pivot);
-      if (pivotComp == 0) {
-        e++;
+      if (pivotComp < 0) {
+        swap(values, e, l);
+        l++;
+        //e++;
       } else if (pivotComp > 0) {
         swap(values, e, g);
         g--;
-      } else {
-        swap(values, e, l);
-        l++;
-        e++;
+        e--;
       } // if/else
+      e++;
     } // for
     int[] toReturn = {l, e - 1};
     return toReturn;
-  } // partition(T[],int)
+  } // partition(T[],int,int,int)
 
   /**
    * Swap two values in an array (copied from the tools).
