@@ -64,7 +64,7 @@ public class MergeSorter<T> implements Sorter<T> {
     if (lb >= ub) {
       return;
     } // if
-    int midpoint = lb / 2 + ub / 2;
+    int midpoint = lb + (ub - lb) / 2;
     sort(values, lb, midpoint);
     sort(values, midpoint + 1, ub);
     merge(values, lb, ub, midpoint);

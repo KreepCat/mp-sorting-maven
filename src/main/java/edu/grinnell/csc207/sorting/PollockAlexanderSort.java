@@ -63,7 +63,7 @@ public class PollockAlexanderSort<T> implements Sorter<T> {
     if (lb >= ub) {
       return;
     } // if
-    int midpoint = (lb + ub) / 2;
+    int midpoint = lb + (ub - lb) / 2;
     sort(values, lb, midpoint);
     sort(values, midpoint + 1, ub);
     int lowbound = findLoc(values, values[midpoint + 1], lb, midpoint);

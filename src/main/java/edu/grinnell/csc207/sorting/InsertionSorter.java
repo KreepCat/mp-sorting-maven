@@ -64,12 +64,23 @@ public class InsertionSorter<T> implements Sorter<T> {
   public void insert(T[] values, int i) {
     for (int n = i; n > 0; n--) {
       if (order.compare(values[n - 1], values[n]) > 0) {
-        T storage = values[n - 1];
-        values[n - 1] = values[n];
-        values[n] = storage;
+        swap(values, n - 1, n);
       } else {
         break;
       } // if/else
     } // for
   } // insert(T[],int)
+
+  /**
+   * Swap two values.
+   *
+   * @param arr the array that the values are in.
+   * @param i the first value to swap.
+   * @param j the second value to swap.
+   */
+  static void swap(Object[] arr, int i, int j) {
+    Object tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  } // swap(Object[], int, int)
 } // class InsertionSorter
